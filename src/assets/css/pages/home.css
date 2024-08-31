@@ -1,12 +1,17 @@
 .home {
-    text-align: center;
+    display: grid;
+    justify-items: center;
+    height: 100%;
 }
 
 .home h1 {
+    grid-area: 1 / 1;
     font-size: 40px;
     margin: 10px;
 }
 
 .home img {
-    width: 500px;
+    grid-area: 1 / 1;
+    align-self: center;
+    width: 50vw;
 }

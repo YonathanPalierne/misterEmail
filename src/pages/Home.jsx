@@ -1,10 +1,8 @@
-import imgUrl from '../assets/imgs/react.png'
+import imgUrl from '../assets/imgs/react.svg'
 
 export function Home() {
-    return (
-        <section className="home">
-            <h1>Welcome to our React App</h1>
-            <img src={imgUrl} alt="" />
-        </section>
-    )
+    return <section className="home">
+        <h1>Welcome to our Email App</h1>
+        <img src={imgUrl} alt="" />
+    </section>
 }
