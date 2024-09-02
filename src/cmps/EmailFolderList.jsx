@@ -14,10 +14,22 @@ export function EmailFolderList({ filterBy, onFilterBy }) {
   return (
     <section className='email-folder-list'>
       <ul>
-        <li onClick={() => handleChange("inbox")}>inbox</li>
-        <li onClick={() => handleChange("starred")}>starred</li>
-        <li onClick={() => handleChange("sent")}>sent</li>
-        <li onClick={() => handleChange("trash")}>trash</li>
+        <li onClick={() => handleChange("inbox")}>
+          <span className='material-symbols-rounded'>inbox</span>
+          <span className='email-folder-item'>Inbox</span>
+        </li>
+        <li onClick={() => handleChange("star")}>
+          <span className='material-symbols-rounded'>grade</span>
+          <span className='email-folder-item'>Starred</span>
+        </li>
+        <li onClick={() => handleChange("sent")}>
+          <span className='material-symbols-rounded'>send</span>
+          <span className='email-folder-item'>Sent</span>
+        </li>
+        <li onClick={() => handleChange("trash")}>
+          <span className='material-symbols-rounded'>delete</span>
+          <span className='email-folder-item'>Trash</span>
+        </li>
       </ul>
     </section>
   )

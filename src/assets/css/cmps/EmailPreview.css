@@ -1,20 +1,24 @@
-.email-preview td {
 
-}
 .email-preview.notRead {
-    font-weight: 600;
-    background-color:antiquewhite;
+  font-weight: 600;
+  background-color: antiquewhite;
 }
-.email-preview:hover{
-    font-weight: 600;
-    cursor: pointer;
-    background-color:rgb(244, 214, 175);
+.email-subject {
+  padding-right: 3rem;
+}
+.email-body {
+  padding-right: 3rem;
+}
+.email-preview.hover {
+  cursor: pointer;
+  background-color: rgb(244, 214, 175);
+}
+.email-btns{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.email-btns a{
+  text-decoration: none;
 }
 
-.email-subject{
-    padding-right: 3rem;
-}
-.email-body{
-    padding-right: 3rem;
-
-}

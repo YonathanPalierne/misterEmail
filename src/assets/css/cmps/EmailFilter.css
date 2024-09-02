@@ -1,13 +1,5 @@
-.email-list ul {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 1em;
-
-    padding: 1em;
-    list-style: none;
-}
-
-.email-list li {
-    padding: 1em;
-    border: 1px solid lightgray;
+.email-filter  {
+    display: flex;
+    gap:20px;
+    padding:15px;
 }

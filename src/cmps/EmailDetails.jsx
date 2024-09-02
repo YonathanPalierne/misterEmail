@@ -4,23 +4,44 @@ import { emailService } from "../services/email.service"
 import { Link } from "react-router-dom"
 
 export function EmailDetails() {
+  const [email, setEmail] = useState(null)
+  const { emailId } = useParams()
 
-    const [ email, setEmail ] = useState(null)
-    const { emailId } = useParams()
+  useEffect(() => {
+    loadEmail()
+  }, [emailId])
 
-    useEffect(() => {
-        loadEmail()
-    }, [emailId])
-
-    async function loadEmail() {
-        const email = await emailService.getById(emailId)
-        setEmail(email) 
+  async function loadEmail() {
+    try {
+      const email = await emailService.getById(emailId)
+      setEmail(email)
+    } catch (err) {
+      console.log(err)
     }
+  }
+  if (!email) return <div>Loading...</div>
 
-    return <section className="email-details">
-        <h1>Details</h1>
-        <pre>{JSON.stringify(email, null, 2)}</pre>
-        <Link to="/email" >Back</Link>
-        <Link to="/email/r4" >Next</Link>
+  return (
+    <section className='email-details'>
+      <div className='email-btns'>
+        <span
+          className='material-symbols-outlined'
+          onClick={() => onRemove(email.id)}
+        >
+          delete
+        </span>
+        <Link to={`/email/${email.id}`} className='material-symbols-outlined'>
+          visibility
+        </Link>
+      </div>
+      <div>{email.subject}</div>
+      <div>{email.from}</div>
+      <div>{email.to}</div>
+      <div>{email.body}</div>
+
+      <pre>{JSON.stringify(email, null, 2)}</pre>
+      <Link to='/email'>Back</Link>
+      <Link to='/email/r4'>Next</Link>
     </section>
+  )
 }

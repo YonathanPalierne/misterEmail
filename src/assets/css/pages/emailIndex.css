@@ -4,13 +4,10 @@
 .email-index-aside    {
     display: flex;
     flex-direction: column;
-    border:1px solid black;
-    flex-grow: 1;
 
 }
 .email-index-content  {
     display: flex;
     flex-direction: column;
-    flex-grow: 6;
-    border:1px solid black;
+    flex-grow: 1;
 }

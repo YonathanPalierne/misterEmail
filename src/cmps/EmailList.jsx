@@ -1,14 +1,17 @@
 import { EmailPreview } from "./EmailPreview"
 
-export function EmailList({ emails, onRemove }) {
+export function EmailList({ emails, onRemove, onToggleStar }) {
   return (
     <section className='email-list'>
       <table>
         <tbody>
           {emails.map(email => (
-            <tr key={email.id} className={email.isRead === true ? 'email-preview' : 'email-preview notRead'}>
-              <EmailPreview  email={email} />
-            </tr>
+            <EmailPreview
+              key={email.id}
+              email={email}
+              onRemove={onRemove}
+              onToggleStar={onToggleStar}
+            />
           ))}
         </tbody>
       </table>

@@ -1,5 +1,12 @@
 import { storageService } from "./async-storage.service.js"
-import { loadFromStorage, saveToStorage, makeId, randomBoolean, makeLorem, makeEmailAddresse } from "./util.service.js"
+import {
+  loadFromStorage,
+  saveToStorage,
+  makeId,
+  randomBoolean,
+  makeLorem,
+  makeEmailAddresse,
+} from "./util.service.js"
 
 export const emailService = {
   query,
@@ -23,12 +30,6 @@ async function query(filterBy) {
   let emails = await storageService.query(STORAGE_KEY)
 
   if (filterBy) {
-    // const filterBy = {
-    //     status: 'inbox/sent/star/trash',
-    //     txt: 'puki', // no need to support complex text search
-    //     isRead: true/false/null,  // (optional property, if missing: show all)
-    //     }
-
     let { status = "inbox", txt = "", isRead = null } = filterBy
 
     emails = emails.filter(
@@ -37,7 +38,7 @@ async function query(filterBy) {
         (!isRead || email.isRead == isRead) &&
         ((status == "inbox" && email.to == loggedinUser.email) ||
           (status == "sent" && email.from == loggedinUser.email) ||
-          (status == "star" && email.isStarred) ||
+          (status == "star" && email.isStarred === true) ||
           (status == "trash" && email.removedAt !== null))
     )
   }
@@ -78,39 +79,23 @@ function getDefaultFilter() {
 }
 
 function _createEmails() {
-
-  // console.log(makeEmailAddresse()[1]);
   let emails = loadFromStorage(STORAGE_KEY)
   if (emails && emails.length > 0) return
 
-  emails = [
-    // {
-    //   id: "e101",
-    //   subject: "Miss you!",
-    //   body: "Would love to catch up sometimes",
-    //   isRead: false,
-    //   isStarred: false,
-    //   sentAt: 1551133930594,
-    //   removedAt: null, //for later use
-    //   from: "momo@momo.com",
-    //   to: "user@appsus.com",
-    // },
-  ]
+  emails = []
 
-  for(let i = 0 ; i < 10 ; i++){
-
+  for (let i = 0; i < 10; i++) {
+    const fake_emails = makeEmailAddresse();
     const tmp = {
       id: makeId(),
       isRead: randomBoolean(),
       isStarred: randomBoolean(),
       removedAt: null,
-      sentAt:  Date.now(),
+      sentAt: Date.now(),
       subject: makeLorem(3),
       body: makeLorem(100),
-      from: makeEmailAddresse()[0],
-      to: makeEmailAddresse()[1],
-      // from: "momo@momo.com",
-      // to: "user@appsus.com",
+      from: fake_emails[0],
+      to: fake_emails[1],
     }
 
     emails.push(tmp)
@@ -119,4 +104,4 @@ function _createEmails() {
   saveToStorage(STORAGE_KEY, emails)
 }
 
-window.rs = emailService // Easy access from console
+// window.rs = emailService // Easy access from console

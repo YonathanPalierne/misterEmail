@@ -1,7 +1,18 @@
 
 .email-folder-list ul {
     list-style: none;
+    padding: 1rem;
 }
 .email-folder-list li {
     cursor: pointer;
+    display: flex;
+    align-items:center;
+    justify-content: space-around;
+}
+
+.email-folder-list li .material-symbols-rounded{
+    flex-grow: 1;
+}
+.email-folder-list li .email-folder-item{
+    flex-grow: 4;
 }

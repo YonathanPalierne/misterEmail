@@ -16,7 +16,7 @@ export function EmailIndex() {
 
   useEffect(() => {
     loadEmails()
-  }, [filterBy])
+  }, [filterBy, emails])
 
   async function loadEmails() {
     try {
@@ -38,6 +38,17 @@ export function EmailIndex() {
     }
   }
 
+  async function saveEmail(email) {
+    try {
+      await emailService.save(email)
+      setEmails(emails)
+
+    } catch (err) {
+      console.log(err)
+      alert("Couldnt remove email")
+    }
+  }
+
   function onFilterBy(filterBy) {
     setFilterBy(filterBy)
   }
@@ -51,8 +62,8 @@ export function EmailIndex() {
       </aside>
       <section className='email-index-content'>
         <EmailFilter filterBy={filterBy} onFilterBy={onFilterBy} />
-        {emailId && <Outlet />}
-        {!emailId && <EmailList emails={emails} onRemove={removeEmail} />}
+        {emailId && <Outlet onRemove={removeEmail}/>}
+        {!emailId && <EmailList emails={emails} onRemove={removeEmail} onToggleStar={saveEmail} />}
       </section>
     </section>
   )
