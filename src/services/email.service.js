@@ -1,78 +1,122 @@
-import { storageService } from './async-storage.service.js'
-import { loadFromStorage, saveToStorage } from './util.service.js'
+import { storageService } from "./async-storage.service.js"
+import { loadFromStorage, saveToStorage, makeId, randomBoolean, makeLorem, makeEmailAddresse } from "./util.service.js"
 
 export const emailService = {
-    query,
-    getById,
-    remove,
-    save,
-    createEmail,
-    getDefaultFilter
+  query,
+  getById,
+  remove,
+  save,
+  createEmail,
+  getDefaultFilter,
 }
 
-const STORAGE_KEY = 'emails'
+const STORAGE_KEY = "emails"
+
+const loggedinUser = {
+  email: "user@appsus.com",
+  fullname: "Mahatma Appsus",
+}
 
 _createEmails()
 
 async function query(filterBy) {
-    let emails = await storageService.query(STORAGE_KEY)
+  let emails = await storageService.query(STORAGE_KEY)
 
-    if (filterBy) {
-        let { minBatteryStatus = 0, model = '' } = filterBy
+  if (filterBy) {
+    // const filterBy = {
+    //     status: 'inbox/sent/star/trash',
+    //     txt: 'puki', // no need to support complex text search
+    //     isRead: true/false/null,  // (optional property, if missing: show all)
+    //     }
 
-        emails = emails.filter(email =>
-            email.model.toLowerCase().includes(model.toLowerCase()) &&
-            email.batteryStatus > minBatteryStatus
-        )
-    }
-    return emails
+    let { status = "inbox", txt = "", isRead = null } = filterBy
+
+    emails = emails.filter(
+      email =>
+        email.body.toLowerCase().includes(txt.toLowerCase()) &&
+        (!isRead || email.isRead == isRead) &&
+        ((status == "inbox" && email.to == loggedinUser.email) ||
+          (status == "sent" && email.from == loggedinUser.email) ||
+          (status == "star" && email.isStarred) ||
+          (status == "trash" && email.removedAt !== null))
+    )
+  }
+  return emails
 }
 
 function getById(id) {
-    return storageService.get(STORAGE_KEY, id)
+  return storageService.get(STORAGE_KEY, id)
 }
 
 function remove(id) {
-    return storageService.remove(STORAGE_KEY, id)
+  return storageService.remove(STORAGE_KEY, id)
 }
 
 function save(emailToSave) {
-    if (emailToSave.id) {
-        return storageService.put(STORAGE_KEY, emailToSave)
-    } else {
-        emailToSave.isOn = false
-        return storageService.post(STORAGE_KEY, emailToSave)
-    }
+  if (emailToSave.id) {
+    return storageService.put(STORAGE_KEY, emailToSave)
+  } else {
+    emailToSave.isOn = false
+    return storageService.post(STORAGE_KEY, emailToSave)
+  }
 }
 
-function createEmail(model = '', type = '', batteryStatus = 100) {
-    return {
-        model,
-        type,
-        batteryStatus,
-    }
+function createEmail(model = "", type = "", batteryStatus = 100) {
+  return {
+    model,
+    type,
+    batteryStatus,
+  }
 }
 
 function getDefaultFilter() {
-    return {
-        type: '',
-        minBatteryStatus: 0,
-        maxBattery: '',
-        model: ''
-    }
+  return {
+    status: "inbox",
+    txt: "",
+    isRead: null,
+  }
 }
 
 function _createEmails() {
-    let emails = loadFromStorage(STORAGE_KEY)
-    if(emails && emails.length > 0) return
 
-    emails = [
-        { id: 'r1', model: 'Turbo Plonter', batteryStatus: 100, type: 'Security' },
-        { id: 'r2', model: 'Salad-O-Matic', batteryStatus: 80, type: 'Cooking' },
-        { id: 'r3', model: 'Dusty', batteryStatus: 100, type: 'Cleaning' },
-        { id: 'r4', model: 'DevTron', batteryStatus: 40, type: 'Office' }
-    ]
-    saveToStorage(STORAGE_KEY, emails)
+  // console.log(makeEmailAddresse()[1]);
+  let emails = loadFromStorage(STORAGE_KEY)
+  if (emails && emails.length > 0) return
+
+  emails = [
+    // {
+    //   id: "e101",
+    //   subject: "Miss you!",
+    //   body: "Would love to catch up sometimes",
+    //   isRead: false,
+    //   isStarred: false,
+    //   sentAt: 1551133930594,
+    //   removedAt: null, //for later use
+    //   from: "momo@momo.com",
+    //   to: "user@appsus.com",
+    // },
+  ]
+
+  for(let i = 0 ; i < 10 ; i++){
+
+    const tmp = {
+      id: makeId(),
+      isRead: randomBoolean(),
+      isStarred: randomBoolean(),
+      removedAt: null,
+      sentAt:  Date.now(),
+      subject: makeLorem(3),
+      body: makeLorem(100),
+      from: makeEmailAddresse()[0],
+      to: makeEmailAddresse()[1],
+      // from: "momo@momo.com",
+      // to: "user@appsus.com",
+    }
+
+    emails.push(tmp)
+  }
+
+  saveToStorage(STORAGE_KEY, emails)
 }
 
-window.rs = emailService            // Easy access from console
+window.rs = emailService // Easy access from console

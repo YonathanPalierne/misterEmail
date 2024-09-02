@@ -1,0 +1,7 @@
+
+.email-folder-list ul {
+    list-style: none;
+}
+.email-folder-list li {
+    cursor: pointer;
+}

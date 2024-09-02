@@ -1,35 +1,66 @@
 import { useEffect, useState } from "react"
 
 export function EmailFilter({ filterBy, onFilterBy }) {
+  const [filterByToEdit, setFilterByToEdit] = useState(filterBy)
 
-    const [ filterByToEdit, setFilterByToEdit ] = useState(filterBy)
+  useEffect(() => {
+    onFilterBy(filterByToEdit)
+  }, [filterByToEdit])
 
-    useEffect(() => {
-        onFilterBy(filterByToEdit)
-    }, [filterByToEdit])
+  function handleChange({ target }) {
+    const { type, name } = target
+    let value
+    switch (type) {
+      case "range":
+      case "number":
+        value = +target.value || 0
+        break
+      case "chexkbox":
+        value = target.value
+        break
+      case "select-one":
+        switch (target.value) {
+          case "true":
+            value = true
+            break
 
-    function handleChange({ target }) {
-        const { type, name } = target
-        const value = type === 'number' ? +target.value : target.value
-        setFilterByToEdit(prev => ({ ...prev, [name]: value }))
+          case "false":
+            value = false
+            break
+
+          default:
+            value = target.value
+            break
+        }
+      case "text":
+            value = target.value
+            break
+
+      case "search":
+            value = target.value
+            break
+
     }
+    setFilterByToEdit(prev => ({ ...prev, [name]: value }))
+  }
 
-    return <section className="email-filter">
-        <label htmlFor="model">Model</label>
-        <input 
-            value={filterByToEdit.model} 
-            onChange={handleChange}
-            id="model" 
-            name="model" 
-            type="text" />
-        
-        <label htmlFor="battery">Battery Status</label>
-        <input 
-            value={filterByToEdit.minBatteryStatus} 
-            onChange={handleChange}
-            id="battery" 
-            name="minBatteryStatus" 
-            type="number" />
+  return (
+    <section className='email-filter'>
+      <input
+        value={filterByToEdit.txt}
+        onChange={handleChange}
+        id='txt'
+        name='txt'
+        type='search'
+        placeholder='search...'
+      />
 
+      <select name='isRead' id='isRead' onChange={handleChange}>
+        <option value='true'>{filterByToEdit.isRead}</option>
+        <option value='true'>true</option>
+        <option value='false'>false</option>
+        <option value=''>both</option>
+      </select>
     </section>
+  )
 }

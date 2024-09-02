@@ -7,6 +7,8 @@
 @import "./App.css";
 
 /* Pages */
+@import "./pages/emailIndex.css";
+@import "./pages/emailDetails.css";
 @import "./pages/home.css";
 @import "./pages/about.css";
 
@@ -14,3 +16,6 @@
 @import "./cmps/AppHeader.css";
 @import "./cmps/AppFooter.css";
 @import "./cmps/EmailList.css";
+@import "./cmps/EmailFolderList.css";
+@import "./cmps/EmailFilter.css";
+@import "./cmps/EmailPreview.css";

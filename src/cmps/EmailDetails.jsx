@@ -6,14 +6,14 @@ import { Link } from "react-router-dom"
 export function EmailDetails() {
 
     const [ email, setEmail ] = useState(null)
-    const { id } = useParams()
+    const { emailId } = useParams()
 
     useEffect(() => {
         loadEmail()
-    }, [id])
+    }, [emailId])
 
     async function loadEmail() {
-        const email = await emailService.getById(id)
+        const email = await emailService.getById(emailId)
         setEmail(email) 
     }
 
