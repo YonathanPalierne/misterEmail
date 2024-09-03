@@ -14,50 +14,24 @@ export function EmailFolderList({ filterBy, onSetFilterBy }) {
 
   return (
     <section className='email-folder-list'>
-      {/* <ul>
-        <li onClick={() => handleChange("inbox")}>
+      <nav>
+        <NavLink to='/email?status=inbox' onClick={() => handleChange("inbox")}>
           <span className='material-symbols-rounded'>inbox</span>
           <span className='email-folder-item'>Inbox</span>
-        </li>
-        <li onClick={() => handleChange("star")}>
+        </NavLink>
+        <NavLink to='/email?status=star' onClick={() => handleChange("star")}>
           <span className='material-symbols-rounded'>grade</span>
           <span className='email-folder-item'>Starred</span>
-        </li>
-        <li onClick={() => handleChange("sent")}>
+        </NavLink>
+        <NavLink to='/email?status=sent' onClick={() => handleChange("sent")}>
           <span className='material-symbols-rounded'>send</span>
           <span className='email-folder-item'>Sent</span>
-        </li>
-        <li onClick={() => handleChange("trash")}>
+        </NavLink>
+        <NavLink to='/email?status=trash' onClick={() => handleChange("trash")}>
           <span className='material-symbols-rounded'>delete</span>
           <span className='email-folder-item'>Trash</span>
-        </li>
-      </ul> */}
-      <ul>
-        <li>
-          <NavLink to='/email?status=inbox' onClick={() => handleChange("inbox")}>
-            <span className='material-symbols-rounded'>inbox</span>
-            <span className='email-folder-item'>Inbox</span>
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to='/email?status=star' onClick={() => handleChange("star")}>
-            <span className='material-symbols-rounded'>grade</span>
-            <span className='email-folder-item'>Starred</span>
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to='/email?status=sent' onClick={() => handleChange("sent")}>
-            <span className='material-symbols-rounded'>send</span>
-            <span className='email-folder-item'>Sent</span>
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to='/email?status=trash' onClick={() => handleChange("trash")}>
-            <span className='material-symbols-rounded'>delete</span>
-            <span className='email-folder-item'>Trash</span>
-          </NavLink>
-        </li>
-      </ul>
+        </NavLink>
+      </nav>
     </section>
   )
 }

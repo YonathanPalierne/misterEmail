@@ -15,6 +15,7 @@
 @import "./cmps/AppHeader.css";
 @import "./cmps/AppFooter.css";
 @import "./cmps/emailDetails.css";
+@import "./cmps/EmailEdit.css";
 @import "./cmps/EmailList.css";
 @import "./cmps/EmailFolderList.css";
 @import "./cmps/EmailFilter.css";

@@ -6,6 +6,7 @@ import { AboutTeam } from "./pages/AboutTeam"
 import { AboutVision } from "./pages/AboutVision"
 import { EmailIndex } from "./pages/EmailIndex"
 import { EmailDetails } from "./cmps/EmailDetails"
+import { EmailEdit } from "./cmps/EmailEdit"
 
 import { AppFooter } from "./cmps/AppFooter"
 import { AppHeader } from "./cmps/AppHeader"
@@ -22,6 +23,7 @@ export function App() {
             <Route path='/about/vision' element={<AboutVision />} />
           </Route>
           <Route path='/email' element={<EmailIndex />} >
+            <Route path="/email/edit/:emailId?" element={<EmailEdit />} />
             <Route path='/email/:emailId' element={<EmailDetails />} />
           </Route>
         </Routes>

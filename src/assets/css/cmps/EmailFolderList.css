@@ -1,21 +1,19 @@
 
-.email-folder-list ul {
+.email-folder-list nav {
     list-style: none;
     padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
 }
-.email-folder-list li,
-.email-folder-list li a{
+.email-folder-list a{
     cursor: pointer;
     display: flex;
+    justify-content: start;
     text-decoration: none;
+}
+.email-folder-list a.active {
+    color: rgb(20, 13, 236);
+}
 
-}
-.email-folder-list li .material-symbols-rounded,
-.email-folder-list li .material-symbols-outlined,
-.email-folder-list li .material-symbols-sharp{
-    display:block;
-}
-.email-folder-list li .email-folder-item{
-    display:block;
-    flex-grow: 4;
-}

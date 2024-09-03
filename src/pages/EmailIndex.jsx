@@ -61,7 +61,7 @@ export function EmailIndex() {
   return (
     <section className='email-index'>
       <aside className='email-index-aside'>
-        <button>Compose</button>
+        {/* <Link to='/email/edit'>Compose</Link> */}
         <EmailFolderList filterBy={{ status }} onSetFilterBy={onSetFilterByDebounce} />
       </aside>
       <section className='email-index-content'>

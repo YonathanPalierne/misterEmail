@@ -63,11 +63,11 @@ function save(emailToSave) {
   }
 }
 
-function createEmail(model = "", type = "", batteryStatus = 100) {
+function createEmail(status = "sent", txt = "", isRead = null) {
   return {
-    model,
-    type,
-    batteryStatus,
+    status,
+    txt,
+    isRead,
   }
 }
 
