@@ -7,40 +7,30 @@ export function EmailEdit() {
     const [email, setEmail] = useState(emailService.createEmail())
     const { onSaveEmail } = useOutletContext()
 
+
     function handleChange({ target }) {
-        const { type, name: field, value } = target
+        let {  name: field, value, type  } = target
         switch (type) {
           case "range":
+            value = +value
           case "number":
-            value = +target.value || 0
+            value = +value || 0
             break
           case "chexkbox":
-            value = target.value
+            value = target.checked
             break
           case "select-one":
-            switch (target.value) {
+            switch (value) {
               case "true":
                 value = true
                 break
-    
               case "false":
                 value = false
                 break
-    
-              default:
-                value = target.value
-                break
             }
-          case "text":
-                value = target.value
-                break
-    
-          case "search":
-                value = target.value
-                break
     
         }
-        setFilterByToEdit(prev => ({ ...prev, [field]: value }))
+        setEmail(prev => ({ ...prev, [field]: value }))
       }
 
     function onSubmitEmail(ev) {
