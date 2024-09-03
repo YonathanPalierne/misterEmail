@@ -95,3 +95,23 @@ export function makeEmailAddresse() {
       : userEmail.unshift(others[Math.floor(Math.random() * others.length)])
   return userEmail
 }
+
+export function debounce(func, time) {
+  let timeoutId
+  return (...args) => {
+      clearTimeout(timeoutId)
+      timeoutId = setTimeout(() => {
+          func(...args)
+      }, time)
+  }
+}
+export function getExistingProperties(obj) {
+  const truthyObj = {}
+  for (const key in obj) {
+      const val = obj[key]
+      if (val || typeof val === 'boolean') {
+          truthyObj[key] = val
+      }
+  }
+  return truthyObj
+}

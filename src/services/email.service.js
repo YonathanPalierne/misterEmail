@@ -15,9 +15,10 @@ export const emailService = {
   save,
   createEmail,
   getDefaultFilter,
+  getFilterFromSearchParams
 }
 
-const STORAGE_KEY = "emails"
+const STORAGE_KEY = "email"
 
 const loggedinUser = {
   email: "user@appsus.com",
@@ -76,6 +77,16 @@ function getDefaultFilter() {
     txt: "",
     isRead: null,
   }
+}
+
+function getFilterFromSearchParams(searchParams) {
+  const defaultFilter = getDefaultFilter()
+  const filterBy = {}
+  for (const field in defaultFilter) {
+      filterBy[field] = searchParams.get(field) || ''
+  }
+
+  return filterBy
 }
 
 function _createEmails() {

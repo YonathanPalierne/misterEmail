@@ -1,21 +1,23 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useParams } from "react-router"
 
 import { emailService } from "../services/email.service"
 import { EmailList } from "../cmps/EmailList"
 import { EmailFilter } from "../cmps/EmailFilter"
 import { EmailFolderList } from "../cmps/EmailFolderList"
-import { Outlet } from "react-router-dom"
+import { Outlet, useSearchParams } from "react-router-dom"
+import { debounce, getExistingProperties } from "../services/util.service"
 
 export function EmailIndex() {
   const [emails, setEmails] = useState(null)
   const { emailId } = useParams()
-
-  const defaultFilter = emailService.getDefaultFilter()
-  const [filterBy, setFilterBy] = useState(defaultFilter)
+  const [searchParams, setSearchParams] = useSearchParams()
+  const [filterBy, setFilterBy] = useState(emailService.getFilterFromSearchParams(searchParams))
+  const onSetFilterByDebounce = useRef(debounce(onSetFilterBy, 400)).current
 
   useEffect(() => {
     loadEmails()
+    setSearchParams(getExistingProperties(filterBy))
   }, [filterBy, emails])
 
   async function loadEmails() {
@@ -49,19 +51,21 @@ export function EmailIndex() {
     }
   }
 
-  function onFilterBy(filterBy) {
-    setFilterBy(filterBy)
-  }
+  function onSetFilterBy(filterBy) {
+    setFilterBy(prevFilter => ({ ...prevFilter, ...filterBy }))
+}
 
   if (!emails) return <div>Loading...</div>
+  const { status, txt, isRead } = filterBy
+
   return (
     <section className='email-index'>
       <aside className='email-index-aside'>
         <button>Compose</button>
-        <EmailFolderList filterBy={filterBy} onFilterBy={onFilterBy} />
+        <EmailFolderList filterBy={{ status }} onSetFilterBy={onSetFilterByDebounce} />
       </aside>
       <section className='email-index-content'>
-        <EmailFilter filterBy={filterBy} onFilterBy={onFilterBy} />
+        <EmailFilter filterBy={{ txt, isRead }} onSetFilterBy={onSetFilterByDebounce}/>
         {emailId && <Outlet onRemove={removeEmail}/>}
         {!emailId && <EmailList emails={emails} onRemove={removeEmail} onToggleStar={saveEmail} />}
       </section>

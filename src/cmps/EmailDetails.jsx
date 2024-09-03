@@ -39,7 +39,7 @@ export function EmailDetails() {
       <div>{email.to}</div>
       <div>{email.body}</div>
 
-      <pre>{JSON.stringify(email, null, 2)}</pre>
+      {/* <pre>{JSON.stringify(email, null, 2)}</pre> */}
       <Link to='/email'>Back</Link>
       <Link to='/email/r4'>Next</Link>
     </section>

@@ -3,16 +3,19 @@
     list-style: none;
     padding: 1rem;
 }
-.email-folder-list li {
+.email-folder-list li,
+.email-folder-list li a{
     cursor: pointer;
     display: flex;
-    align-items:center;
-    justify-content: space-around;
-}
+    text-decoration: none;
 
-.email-folder-list li .material-symbols-rounded{
-    flex-grow: 1;
+}
+.email-folder-list li .material-symbols-rounded,
+.email-folder-list li .material-symbols-outlined,
+.email-folder-list li .material-symbols-sharp{
+    display:block;
 }
 .email-folder-list li .email-folder-item{
+    display:block;
     flex-grow: 4;
 }

@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react"
 
-export function EmailFilter({ filterBy, onFilterBy }) {
+export function EmailFilter({ filterBy, onSetFilterBy }) {
   const [filterByToEdit, setFilterByToEdit] = useState(filterBy)
 
   useEffect(() => {
-    onFilterBy(filterByToEdit)
+    onSetFilterBy(filterByToEdit)
   }, [filterByToEdit])
 
   function handleChange({ target }) {
@@ -56,10 +56,10 @@ export function EmailFilter({ filterBy, onFilterBy }) {
       />
 
       <select name='isRead' id='isRead' onChange={handleChange}>
-        <option value='true'>{filterByToEdit.isRead}</option>
-        <option value='true'>true</option>
-        <option value='false'>false</option>
-        <option value=''>both</option>
+        <option value={filterByToEdit.isRead}></option>
+        <option value='true'>read</option>
+        <option value='false'>not read</option>
+        <option value=''>all</option>
       </select>
     </section>
   )
