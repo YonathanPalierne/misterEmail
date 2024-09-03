@@ -63,11 +63,12 @@ function save(emailToSave) {
   }
 }
 
-function createEmail(status = "sent", txt = "", isRead = null) {
+function createEmail() {
   return {
-    status,
-    txt,
-    isRead,
+    subject: '',
+    body: '',
+    from: loggedinUser.email,
+    to: ''
   }
 }
 

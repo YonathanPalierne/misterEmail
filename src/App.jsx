@@ -11,24 +11,29 @@ import { EmailEdit } from "./cmps/EmailEdit"
 import { AppFooter } from "./cmps/AppFooter"
 import { AppHeader } from "./cmps/AppHeader"
 
+import { UserMsg } from "./cmps/UserMsg"
+
 export function App() {
   return (
     <Router>
-      <AppHeader />
-      <main>
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/about' element={<About />}>
-            <Route path='/about/team' element={<AboutTeam />} />
-            <Route path='/about/vision' element={<AboutVision />} />
-          </Route>
-          <Route path='/email' element={<EmailIndex />} >
-            <Route path="/email/edit/:emailId?" element={<EmailEdit />} />
-            <Route path='/email/:emailId' element={<EmailDetails />} />
-          </Route>
-        </Routes>
-      </main>
-      <AppFooter />
+      <section className='main-app'>
+        <AppHeader />
+        <main className='container'>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/about' element={<About />}>
+              <Route path='/about/team' element={<AboutTeam />} />
+              <Route path='/about/vision' element={<AboutVision />} />
+            </Route>
+            <Route path='/email' element={<EmailIndex />}>
+              <Route path='/email/edit/:emailIdEdit?' element={<EmailEdit />} />
+              <Route path='/email/:emailIdDetails' element={<EmailDetails />} />
+            </Route>
+          </Routes>
+        </main>
+        <AppFooter />
+        {/* <UserMsg /> */}
+      </section>
     </Router>
   )
 }

@@ -1,6 +1,6 @@
 import { EmailPreview } from "./EmailPreview"
 
-export function EmailList({ emails, onRemove, onToggleStar }) {
+export function EmailList({ emails, onRemove, saveEmail }) {
   return (
     <section className='email-list'>
       <table>
@@ -10,7 +10,7 @@ export function EmailList({ emails, onRemove, onToggleStar }) {
               key={email.id}
               email={email}
               onRemove={onRemove}
-              onToggleStar={onToggleStar}
+              saveEmail={saveEmail}
             />
           ))}
         </tbody>

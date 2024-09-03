@@ -5,15 +5,15 @@ import { Link } from "react-router-dom"
 
 export function EmailDetails() {
   const [email, setEmail] = useState(null)
-  const { emailId } = useParams()
+  const { emailIdDetails } = useParams()
 
   useEffect(() => {
     loadEmail()
-  }, [emailId])
+  }, [emailIdDetails])
 
   async function loadEmail() {
     try {
-      const email = await emailService.getById(emailId)
+      const email = await emailService.getById(emailIdDetails)
       setEmail(email)
     } catch (err) {
       console.log(err)

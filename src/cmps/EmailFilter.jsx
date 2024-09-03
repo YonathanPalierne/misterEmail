@@ -15,7 +15,7 @@ export function EmailFilter({ filterBy, onSetFilterBy }) {
       case "number":
         value = +target.value || 0
         break
-      case "chexkbox":
+      case "checkbox":
         value = target.value
         break
       case "select-one":

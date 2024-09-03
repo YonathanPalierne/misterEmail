@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
 
-export function EmailPreview({ email, onRemove, onToggleStar }) {
+export function EmailPreview({ email, onRemove, saveEmail }) {
   const [showBtns, setShowBtns] = useState(false)
 
   function toggleDateBtns(ev) {
@@ -21,7 +21,7 @@ export function EmailPreview({ email, onRemove, onToggleStar }) {
       <td className='email-subject'>{email.subject}</td>
       <td
         className='email-starred'
-        onClick={() => onToggleStar({ ...email, isStarred: !email.isStarred })}
+        onClick={() => saveEmail({ ...email, isStarred: !email.isStarred })}
       >
         {email.isStarred === true ? (
           <span className='material-symbols-sharp'>star</span>

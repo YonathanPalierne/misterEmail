@@ -1,15 +1,46 @@
-.email-index  {
-    display: flex;
+.email-index {
+  display: flex;
 }
-.email-index-aside    {
-    flex-basis: 10%;
-    display: flex;
-    flex-direction: column;
-
+.email-index-aside {
+  flex-basis: 10%;
+  display: flex;
+  flex-direction: column;
 }
-.email-index-content  {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-
+.email-index-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.compose-email {
+    margin-block-start: 1rem;
+  justify-content: center;
+  text-align: center;
+  white-space: nowrap;
+  outline: 0;
+  text-shadow: none;
+  -webkit-user-drag: none;
+  border: none;
+  line-height: 32px;
+  margin-right: 0;
+  -webkit-font-smoothing: antialiased;
+  font-family: "Google Sans", Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
+  font-size: 0.875rem;
+  letter-spacing: normal;
+  align-items: center;
+  background-color: #c2e7ff;
+  background-image: none;
+  display: inline-flex;
+  font-weight: 500;
+  overflow: hidden;
+  text-transform: none;
+  box-shadow: 0 1px 2px 0 #0000, 0 1px 3px 1px #0000;
+  cursor: pointer;
+  border-radius: 16px;
+  color: #001d35;
+  height: 56px;
+  padding: 0 24px 0 0;
+  min-width: 96px;
+  transition: box-shadow 0.08s linear,
+    min-width 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
 }
