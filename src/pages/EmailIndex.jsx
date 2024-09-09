@@ -10,6 +10,8 @@ import { Outlet, useSearchParams, useNavigate } from "react-router-dom"
 import { debounce, getExistingProperties } from "../services/util.service"
 import { Link } from "react-router-dom"
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service"
+// import { useEffectUpdate } from "../customInput/useEffectUpdate"
+
 
 export function EmailIndex() {
   const navigate = useNavigate()
@@ -18,10 +20,9 @@ export function EmailIndex() {
   const { emailIdDetails } = useParams()
   const { emailIdEdit } = useParams()
   const [searchParams, setSearchParams] = useSearchParams()
-  const [filterBy, setFilterBy] = useState(
-    emailService.getFilterFromSearchParams(searchParams)
-  )
+  const [filterBy, setFilterBy] = useState(emailService.getFilterFromSearchParams(searchParams))
   const onSetFilterByDebounce = useRef(debounce(onSetFilterBy, 400)).current
+  // const onSetFilterByDebounce = useRef(onSetFilterBy).current
 
   const [dyncmps, setDyncmps] = useState({
     saveEmail: saveEmail,
@@ -32,7 +33,14 @@ export function EmailIndex() {
   useEffect(() => {
     loadEmails()
     setSearchParams(getExistingProperties(filterBy))
-  }, [filterBy, emails])
+  }, [filterBy])
+
+//   useEffectUpdate(() => {
+//     onSetFilterBy(filterByToEdit)
+//     return () => {
+//         console.log('before change');
+//     }
+// }, [filterByToEdit])
 
   async function loadEmails() {
     try {
@@ -79,6 +87,8 @@ export function EmailIndex() {
     setFilterBy(prevFilter => ({ ...prevFilter, ...filterBy }))
   }
 
+  
+
   if (!emails) return <div>Loading...</div>
   const { status, txt, isRead } = filterBy
 
@@ -115,10 +125,6 @@ function DynamicCmp({ emailIdEdit, emailIdDetails, ...dyncmps }) {
     : emailIdDetails
     ? "emailIdDetails"
     : "listing"
-
-  // {emailIdDetails && !emailIdEdit && <Outlet />}
-  // {emailIdEdit && !emailIdDetails && <Outlet context={{ saveEmail }} />}
-  // {!emailIdDetails && !emailIdEdit && (
 
   const dynamicCmps = {
     emailIdDetails: <EmailDetails />,

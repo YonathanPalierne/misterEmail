@@ -35,7 +35,7 @@ async function query(filterBy) {
 
     emails = emails.filter(
       email =>
-        email.body.toLowerCase().includes(txt.toLowerCase()) &&
+       ( email.body.toLowerCase().includes(txt.toLowerCase()) ||  email.subject.toLowerCase().includes(txt.toLowerCase())) &&
         (!isRead || email.isRead == isRead) &&
         ((status == "inbox" && email.to == loggedinUser.email) ||
           (status == "sent" && email.from == loggedinUser.email) ||

@@ -12,8 +12,9 @@
 @import "./pages/about.css";
 
 /* Components */
-@import "./cmps/AppHeader.css";
-@import "./cmps/AppFooter.css";
+@import "./cmps/accordion.css";
+@import "./cmps/app-header.css";
+@import "./cmps/app-footer.css";
 @import "./cmps/emailDetails.css";
 @import "./cmps/EmailEdit.css";
 @import "./cmps/EmailList.css";

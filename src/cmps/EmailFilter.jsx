@@ -1,7 +1,15 @@
 import { useEffect, useState } from "react"
+// import { useEffectUpdate } from "../customInput/useEffectUpdate"
 
 export function EmailFilter({ filterBy, onSetFilterBy }) {
   const [filterByToEdit, setFilterByToEdit] = useState(filterBy)
+
+//   useEffectUpdate(() => {
+//     onSetFilterBy(filterByToEdit)
+//     return () => {
+//         console.log('before change');
+//     }
+// }, [filterByToEdit])
 
   useEffect(() => {
     onSetFilterBy(filterByToEdit)
@@ -43,6 +51,7 @@ export function EmailFilter({ filterBy, onSetFilterBy }) {
     }
     setFilterByToEdit(prev => ({ ...prev, [name]: value }))
   }
+  console.log('filter render', filterBy);
 
   return (
     <section className='email-filter'>

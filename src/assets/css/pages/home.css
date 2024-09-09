@@ -1,17 +1,26 @@
 .home {
-    display: grid;
-    justify-items: center;
-    height: 100%;
+    text-align: center;
 }
 
 .home h1 {
-    grid-area: 1 / 1;
     font-size: 40px;
     margin: 10px;
 }
 
 .home img {
-    grid-area: 1 / 1;
-    align-self: center;
-    width: 50vw;
+    width: 500px;
+}
+
+.fade-out {
+    animation: fade-out 3s;
+}
+
+@keyframes fade-out {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
