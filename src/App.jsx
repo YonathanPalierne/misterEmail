@@ -12,10 +12,10 @@ import { AppFooter } from "./cmps/AppFooter"
 import { AppHeader } from "./cmps/AppHeader"
 
 import { UserMsg } from "./cmps/UserMsg"
-import GoogleMap from './tmp/GoogleMap'
-import { MyForm } from './tmp/MyForm'
-import { MyChart } from './tmp/MyChart'
-import { Material } from './tmp/Material'
+// import GoogleMap from './tmp/GoogleMap'
+// import { MyForm } from './tmp/MyForm'
+// import { MyChart } from './tmp/MyChart'
+// import { Material } from './tmp/Material'
 import 'animate.css';
 
 
@@ -28,10 +28,10 @@ export function App() {
         <main className='container'>
           <Routes>
             <Route path='/' element={<Home />} />
-            <Route path='/googlemap' element={<GoogleMap />} />
+            {/* <Route path='/googlemap' element={<GoogleMap />} />
             <Route path='/formik' element={<MyForm />} />
             <Route path='/chart' element={<MyChart />} />
-            <Route path='/material' element={<Material />} />
+            <Route path='/material' element={<Material />} /> */}
             <Route path='/about' element={<About />}>
               <Route path='/about/team' element={<AboutTeam />} />
               <Route path='/about/vision' element={<AboutVision />} />
